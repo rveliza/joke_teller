@@ -24,7 +24,7 @@ const VoiceRSS={speech:function(e){this._validate(e),this._request(e)},_validate
 const tellMe = (joke) => {
     // console.log('tell me: ', joke);
         VoiceRSS.speech({
-        key: 'API KEY',
+        key: '',
         src: joke,
         hl: 'en-us',
         v: 'Linda',
@@ -33,6 +33,11 @@ const tellMe = (joke) => {
         f: '44khz_16bit_stereo',
         ssml: false
     });
+}
+
+// Disable/Enable Button
+const toggleButton = () => {
+    button.disabled = !button.disabled;
 }
 
 // Get Jokes from Joke API
@@ -50,11 +55,19 @@ const getJokes = async() => {
         }
 
         // console.log(joke);
+        //  Text to Speech
         tellMe(joke);
+
+        // Disable Button
+        toggleButton();
     } catch (error) {
         // Catch Errors Here
         console.log('Whoops', error);
     }
 }
 
-getJokes();
+// getJokes();
+
+// Event Listeners
+button.addEventListener('click', getJokes);
+audioElement.addEventListener('ended', toggleButton);
