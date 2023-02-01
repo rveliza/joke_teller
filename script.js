@@ -20,6 +20,21 @@ const VoiceRSS={speech:function(e){this._validate(e),this._request(e)},_validate
 
 // test();
 
+// Passing Joke to VoiceRSS API
+const tellMe = (joke) => {
+    // console.log('tell me: ', joke);
+        VoiceRSS.speech({
+        key: 'API KEY',
+        src: joke,
+        hl: 'en-us',
+        v: 'Linda',
+        r: 0, 
+        c: 'mp3',
+        f: '44khz_16bit_stereo',
+        ssml: false
+    });
+}
+
 // Get Jokes from Joke API
 const getJokes = async() => {
     let joke = '';
@@ -34,7 +49,8 @@ const getJokes = async() => {
             joke = data.joke;
         }
 
-        console.log(joke);
+        // console.log(joke);
+        tellMe(joke);
     } catch (error) {
         // Catch Errors Here
         console.log('Whoops', error);
